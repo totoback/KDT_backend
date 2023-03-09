@@ -6,7 +6,7 @@ const PORT = 4000;
 
 const USER = {
   1: {
-    email: 'tetz',
+    id: 'tetz',
     name: '이효석',
   },
 };
