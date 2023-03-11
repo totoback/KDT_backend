@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Hello, EJS world</h1>
+  <h1>포스트 목록</h1>
+  <ul>
+    <% if(postsCounts > 0){ %>
+      <% for(let i = 0; i < postsCounts; i++){%>
+        <li>
+          <p>Title : <%= Posts[i].title %></p>
+          <p>Content : <%= Posts[i].content %></p>
+        </li>
+      <% } %>
+    <% } else { %>
+      <li>회원 정보가 없습니다.</li>
+    <% } %>
+  </ul>
+  <form action="/posts/add" method="POST">
+    <div>
+      <label>타이틀</label>
+      <input type="text" name="title" />
+      <!-- name이 백엔드에서 받는 키값 -->
+    </div>
+    <div>
+      <label>컨텐츠</label>
+      <input type="text" name="content" />
+      <!-- name이 백엔드에서 받는 키값 -->
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
