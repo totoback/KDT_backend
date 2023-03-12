@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="js/main.js"></script>
+    <title>게시판</title>
+  </head>
+
+  <body>
+    <h1>post 목록</h1>
+    <br />
+    <h2>총 POST 수 : <%= post.length;%></h2>
+    <ul>
+      <% if(post.length > 0) {%> <% for(let i=0; i< post.length; i++) {%>
+      <li>
+        <p>TITLE : <%= post[i].title %></p>
+        <p>CONTENTS : <%= post[i].content %></p>
+        <button class="deleteBtn" onclick="deletePost('<%= post[i].title %>')">
+          게시물 삭제
+        </button>
+      </li>
+      <% }%> <%} else console.log("XX");%>
+    </ul>
+    <br />
+    <h2>POST 등록</h2>
+    <form action="/post/add" method="POST">
+      <div>
+        <label>TITLE : </label>
+        <input type="text" name="title" />
+      </div>
+      <div>
+        <label>NAME : </label>
+        <input type="text" name="content" />
+      </div>
+      <button type="submit">게시물 등록</button>
+    </form>
+    <script>
+      function deletePost(title) {
+        // title을 인자로 받아서
+        fetch(`http://localhost:4000/post/delete/${title}`, {
+          // localhost:4000/post/delete/:title로 주소를 받으니
+          // 인자로 받은 title을 :title위치에 넣어줌(req.params.title의 역할)
+          method: 'DELETE', // delete 요청
+          headers: {
+            'Content-type': 'application/json',
+          },
+        }).then((res) => {
+          console.log(res);
+          location.reload(); // 새로고침
+        });
+      }
+    </script>
+  </body>
+</html>
